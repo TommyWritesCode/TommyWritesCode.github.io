@@ -1,14 +1,6 @@
 /* 90s Retro Design Overrides */
 /* Late 90s/Early 2000s Nostalgic Styling */
 
-/* Smooth transitions for theme switching */
-.theme-transitioning * {
-    transition: none !important;
-}
-
-.theme-transitioning {
-    opacity: 0.98;
-}
 
 /* Import retro fonts */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap');
@@ -44,8 +36,8 @@
     --scanline-speed: 0.1s;
 }
 
-/* Dark theme overrides for retro */
-[data-theme="dark"] {
+/* Apply retro dark theme */
+:root {
     --bg-color: var(--bg-dark);
     --bg-secondary: var(--bg-panel);
     --text-color: var(--neon-cyan);
@@ -54,18 +46,6 @@
     --border-color: var(--neon-magenta);
     --primary-color: var(--neon-cyan);
     --accent-color: var(--neon-magenta);
-}
-
-/* Light theme retro colors */
-[data-theme="light"] {
-    --bg-color: #f0f0f0;
-    --bg-secondary: #e0e0e0;
-    --text-color: #000080;
-    --text-light: #800080;
-    --text-lighter: #666666;
-    --border-color: #0000ff;
-    --primary-color: #0000ff;
-    --accent-color: #ff00ff;
 }
 
 /* CRT Scanline Effect */
