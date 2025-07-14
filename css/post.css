@@ -1,0 +1,129 @@
+
+/* Post content styling */
+.post {
+  padding: var(--space-4xl) 0;
+}
+
+.post__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+  flex-wrap: wrap;
+}
+
+.post__category {
+  background: var(--neon-pink);
+  color: #000;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.post__date {
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.post__back {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  margin-left: auto;
+}
+
+.post__back:hover {
+  color: var(--neon-green);
+  text-shadow: 0 0 10px currentColor;
+}
+
+.post__content {
+  background: var(--bg-secondary);
+  padding: var(--space-3xl);
+  border-radius: var(--space-lg);
+  line-height: 1.7;
+}
+
+.post__content h1,
+.post__content h2,
+.post__content h3 {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px currentColor;
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-lg);
+}
+
+.post__content h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+
+.post__content h2 {
+  font-size: 2rem;
+}
+
+.post__content h3 {
+  font-size: 1.5rem;
+}
+
+.post__content p {
+  margin-bottom: var(--space-lg);
+  color: var(--text-primary);
+}
+
+.post__content strong {
+  color: var(--neon-green);
+  font-weight: 600;
+}
+
+.post__content em {
+  color: var(--neon-pink);
+}
+
+.post__content ul,
+.post__content ol {
+  margin-bottom: var(--space-lg);
+  padding-left: var(--space-xl);
+}
+
+.post__content li {
+  margin-bottom: var(--space-sm);
+  color: var(--text-primary);
+}
+
+.post__content code {
+  background: var(--bg-tertiary);
+  color: var(--neon-green);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.post__content pre {
+  background: var(--bg-tertiary);
+  padding: var(--space-lg);
+  border-radius: var(--space-md);
+  overflow-x: auto;
+  margin-bottom: var(--space-lg);
+  border: 1px solid var(--border-color);
+}
+
+.post__content pre code {
+  background: none;
+  padding: 0;
+  color: var(--neon-green);
+}
+
+.post__content blockquote {
+  border-left: 4px solid var(--neon-cyan);
+  margin-left: 0;
+  padding-left: var(--space-lg);
+  color: var(--text-medium);
+  font-style: italic;
+}

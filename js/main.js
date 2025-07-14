@@ -37,6 +37,17 @@
                 localStorage.setItem('theme', newTheme);
             });
         }
+        
+        // Sound effects toggle (Ctrl+M shortcut)
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'm') {
+                event.preventDefault();
+                if (window.sfxManager) {
+                    const isEnabled = window.sfxManager.toggle();
+                    showNotification(isEnabled ? 'Sound effects enabled' : 'Sound effects disabled');
+                }
+            }
+        });
     }
     
     function getCurrentTheme() {
@@ -1505,6 +1516,43 @@
         }
     }
     
+    // Show temporary notification
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        // Animate in
+        setTimeout(() => {
+            notification.style.opacity = '1';
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+        
+        // Animate out and remove
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
+
     // Add terminal-style console message
     function showTerminalWelcome() {
         console.log(`
