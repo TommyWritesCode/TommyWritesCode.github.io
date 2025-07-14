@@ -6,8 +6,11 @@ class SfxManager {
     this.sounds = {};
     this.enabled = !localStorage.getItem('disableSfx');
     this.respectsMotion = true;
+    this.audioContext = null;
+    this.userInteracted = false;
     
     this.init();
+    this.setupUserInteractionListener();
   }
 
   async init() {
@@ -17,7 +20,42 @@ class SfxManager {
       return;
     }
 
-    // Preload sound files
+    // Initialize Web Audio API for immediate sound playback
+    try {
+      this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      this.createSyntheticSounds();
+    } catch (error) {
+      console.log('Web Audio API not supported, fallback to HTML5 audio');
+      this.initHTMLAudio();
+    }
+  }
+
+  setupUserInteractionListener() {
+    // Listen for any user interaction to enable audio context
+    const enableAudio = () => {
+      this.userInteracted = true;
+      if (this.audioContext && this.audioContext.state === 'suspended') {
+        this.audioContext.resume();
+      }
+      // Remove listeners after first interaction
+      document.removeEventListener('click', enableAudio);
+      document.removeEventListener('keydown', enableAudio);
+      document.removeEventListener('touchstart', enableAudio);
+    };
+
+    document.addEventListener('click', enableAudio);
+    document.addEventListener('keydown', enableAudio);
+    document.addEventListener('touchstart', enableAudio);
+  }
+
+  createSyntheticSounds() {
+    // Create synthetic sounds using Web Audio API - these work immediately
+    this.sounds.hover = () => this.playBeep(600, 50, 0.03);
+    this.sounds.click = () => this.playBeep(1000, 100, 0.05);
+  }
+
+  initHTMLAudio() {
+    // Fallback to HTML5 audio
     try {
       this.sounds.hover = new Audio('assets/sfx/hover.mp3');
       this.sounds.click = new Audio('assets/sfx/click.mp3');
@@ -31,8 +69,35 @@ class SfxManager {
       this.sounds.click.preload = 'auto';
       
     } catch (error) {
-      console.log('Sound files not found, running in silent mode');
-      this.enabled = false;
+      console.log('Sound files not found, using synthetic sounds');
+      this.createSyntheticSounds();
+    }
+  }
+
+  playBeep(frequency = 800, duration = 100, volume = 0.05) {
+    if (!this.audioContext || !this.enabled) return;
+    
+    try {
+      if (this.audioContext.state === 'suspended') {
+        this.audioContext.resume();
+      }
+      
+      const oscillator = this.audioContext.createOscillator();
+      const gainNode = this.audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(this.audioContext.destination);
+      
+      oscillator.frequency.value = frequency;
+      oscillator.type = 'square';
+      
+      gainNode.gain.setValueAtTime(volume, this.audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + duration / 1000);
+      
+      oscillator.start();
+      oscillator.stop(this.audioContext.currentTime + duration / 1000);
+    } catch (error) {
+      // Sound failed, continue silently
     }
   }
 
@@ -40,10 +105,16 @@ class SfxManager {
     if (!this.enabled || !this.sounds[type]) return;
     
     try {
-      this.sounds[type].currentTime = 0;
-      this.sounds[type].play().catch(() => {
-        // Autoplay prevented, that's fine
-      });
+      if (typeof this.sounds[type] === 'function') {
+        // Synthetic sound function
+        this.sounds[type]();
+      } else {
+        // HTML5 Audio object
+        this.sounds[type].currentTime = 0;
+        this.sounds[type].play().catch(() => {
+          // Autoplay prevented, that's fine
+        });
+      }
     } catch (error) {
       // Sound failed, continue silently
     }

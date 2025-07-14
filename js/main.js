@@ -19,6 +19,10 @@
         setupRetroEffects();
         setupCollapsingHeaders();
         setupPerformanceOptimizations();
+        setupVisitorCounter();
+        setupLaserEffects();
+        setupTechnoEasterEggs();
+        setupEnhancedInteractions();
     }
     
     // Sound Effects Setup
@@ -132,9 +136,9 @@
         }
     }
     
-    // Scroll Animations using Intersection Observer
+    // Enhanced Scroll Animations with Staggered Reveals
     function setupScrollAnimations() {
-        const animatedElements = document.querySelectorAll('.preview__card, .project-card, .blog-card, .philosophy__card');
+        const animatedElements = document.querySelectorAll('.preview__card, .project-card, .blog-card, .philosophy__card, .about__heading, .preview__title, .retro-table-cell');
         
         // Check if user prefers reduced motion
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -145,26 +149,59 @@
         }
         
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.05,  // Trigger much earlier
+            rootMargin: '100px 0px 50px 0px'  // Start animation 100px before element is visible
         };
         
         const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    // Much faster staggered animation delay
+                    const delay = index * 20;  // Reduced from 100ms to 20ms
+                    
+                    setTimeout(() => {
+                        entry.target.classList.add('animate-in');
+                        
+                        // Add laser burst effect for cards (but faster)
+                        if (entry.target.classList.contains('preview__card') || 
+                            entry.target.classList.contains('project-card') || 
+                            entry.target.classList.contains('blog-card')) {
+                            addRevealEffect(entry.target);
+                        }
+                    }, delay);
+                    
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
         
         // Set initial state and observe elements
-        animatedElements.forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        animatedElements.forEach((element, index) => {
+            element.classList.add('animate-prepare');
             observer.observe(element);
+        });
+    }
+    
+    function addRevealEffect(element) {
+        // Create a brief glow effect when element appears - much faster
+        const originalBoxShadow = element.style.boxShadow;
+        element.style.boxShadow = originalBoxShadow + ', 0 0 20px rgba(0, 255, 255, 0.6)';
+        
+        setTimeout(() => {
+            element.style.boxShadow = originalBoxShadow;
+        }, 300);  // Reduced from 600ms to 300ms
+        
+        // Add corner laser effects - much faster
+        const corners = element.querySelectorAll('.laser-corner');
+        corners.forEach((corner, i) => {
+            setTimeout(() => {
+                corner.style.opacity = '1';
+                corner.style.animation = 'laser-corner-reveal 0.2s ease-out';  // Reduced from 0.4s to 0.2s
+                setTimeout(() => {
+                    corner.style.opacity = '0';
+                    corner.style.animation = '';
+                }, 200);  // Reduced from 400ms to 200ms
+            }, i * 30);  // Reduced from 100ms to 30ms
         });
     }
     
@@ -312,6 +349,105 @@
         }
     }
     
+    // Visitor Counter functionality
+    function setupVisitorCounter() {
+        const counterElement = document.getElementById('visitor-count');
+        if (!counterElement) return;
+        
+        // Get current count from localStorage or API, but don't increment yet
+        let currentCount = parseInt(localStorage.getItem('visitorCount')) || 0;
+        
+        // Display current count immediately
+        const formatted = currentCount.toString().padStart(4, '0');
+        counterElement.textContent = formatted;
+        
+        // Wait 2-3 seconds, then increment with visual cue
+        setTimeout(() => {
+            incrementVisitorCount(counterElement, currentCount);
+        }, 2500); // 2.5 second delay
+        
+        // Also try to sync with API in background
+        syncWithAPI(counterElement);
+    }
+    
+    function incrementVisitorCount(element, currentCount) {
+        // Add visual cue before incrementing
+        addIncrementVisualCue(element);
+        
+        // Increment the count
+        const newCount = currentCount + 1;
+        localStorage.setItem('visitorCount', newCount);
+        
+        // Wait for visual cue, then update number
+        setTimeout(() => {
+            const formatted = newCount.toString().padStart(4, '0');
+            element.textContent = formatted;
+            
+            // Add a brief glow effect when number changes
+            element.style.animation = 'count-increment 0.6s ease-out';
+            setTimeout(() => {
+                element.style.animation = '';
+            }, 600);
+        }, 800); // Wait for visual cue to finish
+    }
+    
+    function addIncrementVisualCue(element) {
+        // Create a small visual indicator
+        const indicator = document.createElement('span');
+        indicator.textContent = '+1';
+        indicator.style.cssText = `
+            position: absolute;
+            color: var(--neon-yellow);
+            font-family: var(--font-pixel);
+            font-size: 8px;
+            font-weight: bold;
+            text-shadow: 0 0 5px currentColor;
+            animation: increment-cue 0.8s ease-out forwards;
+            pointer-events: none;
+            z-index: 1000;
+        `;
+        
+        // Position it near the counter
+        const rect = element.getBoundingClientRect();
+        indicator.style.left = (rect.right + 5) + 'px';
+        indicator.style.top = (rect.top - 5) + 'px';
+        
+        document.body.appendChild(indicator);
+        
+        // Remove after animation
+        setTimeout(() => {
+            if (indicator.parentNode) {
+                indicator.remove();
+            }
+        }, 800);
+        
+        // Also add a brief flash to the counter itself
+        element.style.animation = 'counter-flash 0.3s ease-out';
+        setTimeout(() => {
+            element.style.animation = '';
+        }, 300);
+    }
+    
+    function syncWithAPI(element) {
+        // Try to fetch from an actual API service (optional)
+        fetch('https://api.countapi.xyz/get/tommynicol.github.io/visits')
+            .then(response => response.json())
+            .then(data => {
+                if (data.value && data.value > 0) {
+                    // Update localStorage with API value if it's higher
+                    const localCount = parseInt(localStorage.getItem('visitorCount')) || 0;
+                    if (data.value > localCount) {
+                        localStorage.setItem('visitorCount', data.value);
+                        // Don't update display immediately, just sync in background
+                    }
+                }
+            })
+            .catch(error => {
+                // Fallback to localStorage count - no error needed
+                console.log('Using local visitor count');
+            });
+    }
+
     // Initialize everything when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
@@ -486,11 +622,46 @@
         const style = document.createElement('style');
         style.textContent = `
             @keyframes glitch {
-                0%, 100% { transform: translate(0); }
-                20% { transform: translate(-2px, 2px); }
-                40% { transform: translate(-2px, -2px); }
-                60% { transform: translate(2px, 2px); }
-                80% { transform: translate(2px, -2px); }
+                0%, 100% { 
+                    transform: translate(0); 
+                    filter: brightness(1);
+                }
+                10% { 
+                    transform: translate(-0.5px, 0.5px); 
+                    filter: brightness(1.1);
+                }
+                20% { 
+                    transform: translate(0.5px, -0.5px); 
+                    filter: brightness(0.9);
+                }
+                30% { 
+                    transform: translate(-0.5px, -0.5px); 
+                    filter: brightness(1.05);
+                }
+                40% { 
+                    transform: translate(0.5px, 0.5px); 
+                    filter: brightness(0.95);
+                }
+                50% { 
+                    transform: translate(0); 
+                    filter: brightness(1.1);
+                }
+                60% { 
+                    transform: translate(-0.5px, 0.5px); 
+                    filter: brightness(1);
+                }
+                70% { 
+                    transform: translate(0.5px, -0.5px); 
+                    filter: brightness(1.05);
+                }
+                80% { 
+                    transform: translate(-0.5px, -0.5px); 
+                    filter: brightness(0.98);
+                }
+                90% { 
+                    transform: translate(0.5px, 0.5px); 
+                    filter: brightness(1.02);
+                }
             }
         `;
         document.head.appendChild(style);
@@ -712,6 +883,394 @@
         }
     }
     
+    // Laser Effects Setup
+    function setupLaserEffects() {
+        // Create laser grid background
+        const laserGrid = document.createElement('div');
+        laserGrid.className = 'laser-grid';
+        document.body.appendChild(laserGrid);
+        
+        // Create laser sweep effects
+        for (let i = 0; i < 3; i++) {
+            const laserSweep = document.createElement('div');
+            laserSweep.className = 'laser-sweep';
+            document.body.appendChild(laserSweep);
+        }
+        
+        // Add interactive laser particles on click
+        document.addEventListener('click', createLaserParticle);
+        
+        // Add laser border effects to cards
+        enhanceCardsWithLasers();
+    }
+    
+    function createLaserParticle(e) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+            position: fixed;
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            width: 2px;
+            height: 2px;
+            background: var(--neon-cyan);
+            box-shadow: 
+                0 0 10px var(--neon-cyan),
+                0 0 20px var(--neon-cyan),
+                0 0 30px var(--neon-cyan);
+            pointer-events: none;
+            z-index: 9999;
+            animation: laser-particle-burst 1s ease-out forwards;
+        `;
+        
+        document.body.appendChild(particle);
+        
+        // Create additional particles in a burst pattern
+        for (let i = 0; i < 4; i++) {
+            setTimeout(() => {
+                const subParticle = particle.cloneNode();
+                subParticle.style.left = (e.clientX + (Math.random() - 0.5) * 40) + 'px';
+                subParticle.style.top = (e.clientY + (Math.random() - 0.5) * 40) + 'px';
+                subParticle.style.animationDelay = (i * 0.1) + 's';
+                document.body.appendChild(subParticle);
+                
+                setTimeout(() => subParticle.remove(), 1000);
+            }, i * 50);
+        }
+        
+        setTimeout(() => particle.remove(), 1000);
+    }
+    
+    function enhanceCardsWithLasers() {
+        const cards = document.querySelectorAll('.preview__card, .project-card, .blog-card, .philosophy__card');
+        
+        cards.forEach(card => {
+            // Add laser corner effects
+            const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+            corners.forEach(corner => {
+                const laserCorner = document.createElement('div');
+                laserCorner.className = `laser-corner laser-corner--${corner}`;
+                card.style.position = 'relative';
+                card.appendChild(laserCorner);
+            });
+            
+            // Add hover laser trail effect
+            card.addEventListener('mouseenter', () => {
+                card.style.boxShadow += ', 0 0 40px rgba(0, 255, 255, 0.4)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.boxShadow = card.style.boxShadow.replace(', 0 0 40px rgba(0, 255, 255, 0.4)', '');
+            });
+        });
+    }
+    
+    // Techno Easter Eggs Setup
+    function setupTechnoEasterEggs() {
+        // Konami Code easter egg
+        setupKonamiCode();
+        
+        // Random techno glitches
+        setupRandomGlitches();
+        
+        // Typing sound effects
+        setupTypingSounds();
+        
+        // Secret developer console messages
+        setupConsoleEasterEggs();
+        
+        // Laser keyboard shortcuts
+        setupLaserShortcuts();
+    }
+    
+    function setupKonamiCode() {
+        const konamiCode = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+        let konamiProgress = 0;
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.code === konamiCode[konamiProgress]) {
+                konamiProgress++;
+                if (konamiProgress === konamiCode.length) {
+                    activateTechnoMode();
+                    konamiProgress = 0;
+                }
+            } else {
+                konamiProgress = 0;
+            }
+        });
+    }
+    
+    function activateTechnoMode() {
+        // Activate intense laser mode
+        document.body.classList.add('techno-mode');
+        
+        // Play techno sound if available
+        if (window.sfxManager) {
+            window.sfxManager.playSound('click');
+        }
+        
+        // Create laser storm
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                createLaserParticle({
+                    clientX: Math.random() * window.innerWidth,
+                    clientY: Math.random() * window.innerHeight
+                });
+            }, i * 100);
+        }
+        
+        showNotification('TECHNO_MODE.EXE ACTIVATED!');
+        
+        // Deactivate after 10 seconds
+        setTimeout(() => {
+            document.body.classList.remove('techno-mode');
+            showNotification('TECHNO_MODE.EXE DEACTIVATED');
+        }, 10000);
+    }
+    
+    function setupRandomGlitches() {
+        setInterval(() => {
+            if (Math.random() < 0.1) { // 10% chance every interval
+                const cards = document.querySelectorAll('.preview__card, .project-card, .blog-card');
+                const randomCard = cards[Math.floor(Math.random() * cards.length)];
+                if (randomCard) {
+                    randomCard.style.animation = 'glitch 0.2s ease-in-out';
+                    setTimeout(() => {
+                        randomCard.style.animation = '';
+                    }, 200);
+                }
+            }
+        }, 5000); // Check every 5 seconds
+    }
+    
+    function setupTypingSounds() {
+        const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
+        
+        textInputs.forEach(input => {
+            input.addEventListener('keydown', () => {
+                if (window.sfxManager && Math.random() < 0.3) { // 30% chance
+                    window.sfxManager.playSound('hover');
+                }
+            });
+        });
+    }
+    
+    function setupConsoleEasterEggs() {
+        const messages = [
+            'ACCESSING MAINFRAME...',
+            'NEURAL_NETWORK.SYS: LOADED',
+            'QUANTUM_ALGORITHMS.DLL: ACTIVE',
+            'PHILOSOPHY_ENGINE.EXE: RUNNING',
+            'LASER_PROTOCOLS.INIT: COMPLETE',
+            'TOMMY_NICOL.SYS: OPERATIONAL'
+        ];
+        
+        messages.forEach((msg, index) => {
+            setTimeout(() => {
+                console.log(`%c${msg}`, 'color: #00ffff; font-family: monospace; font-weight: bold; text-shadow: 0 0 5px #00ffff;');
+            }, index * 2000);
+        });
+    }
+    
+    function setupLaserShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // L key for laser burst
+            if (e.key.toLowerCase() === 'l' && e.ctrlKey) {
+                e.preventDefault();
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        createLaserParticle({
+                            clientX: Math.random() * window.innerWidth,
+                            clientY: Math.random() * window.innerHeight
+                        });
+                    }, i * 100);
+                }
+                showNotification('LASER_BURST.EXE ACTIVATED!');
+            }
+        });
+    }
+    
+    // Enhanced Interactions for Crisp Feedback
+    function setupEnhancedInteractions() {
+        // Enhanced click feedback for all interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .btn, .preview__card, .project-card, .blog-card, .nav__link');
+        
+        interactiveElements.forEach(element => {
+            // Add ripple effect on click
+            element.addEventListener('click', createRippleEffect);
+            
+            // Enhanced hover states
+            element.addEventListener('mouseenter', enhanceHoverState);
+            element.addEventListener('mouseleave', resetHoverState);
+            
+            // Touch feedback for mobile
+            element.addEventListener('touchstart', addTouchFeedback);
+            element.addEventListener('touchend', removeTouchFeedback);
+        });
+        
+        // Smooth page transitions
+        setupPageTransitions();
+        
+        // Enhanced form interactions
+        setupFormAnimations();
+    }
+    
+    function createRippleEffect(e) {
+        const element = e.currentTarget;
+        const rect = element.getBoundingClientRect();
+        
+        // Calculate click position relative to element
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Create ripple element
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+            position: absolute;
+            left: ${x}px;
+            top: ${y}px;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            animation: ripple-expand 0.6s ease-out forwards;
+            transform: translate(-50%, -50%);
+        `;
+        
+        // Ensure element has relative positioning
+        if (getComputedStyle(element).position === 'static') {
+            element.style.position = 'relative';
+        }
+        element.style.overflow = 'hidden';
+        
+        element.appendChild(ripple);
+        
+        // Remove ripple after animation
+        setTimeout(() => {
+            if (ripple.parentNode) {
+                ripple.remove();
+            }
+        }, 600);
+    }
+    
+    function enhanceHoverState(e) {
+        const element = e.currentTarget;
+        
+        // Add subtle glow effect
+        if (!element.dataset.originalBoxShadow) {
+            element.dataset.originalBoxShadow = getComputedStyle(element).boxShadow;
+        }
+        
+        // Create floating particles around element
+        if (Math.random() < 0.3) { // 30% chance
+            createHoverParticles(element);
+        }
+    }
+    
+    function resetHoverState(e) {
+        const element = e.currentTarget;
+        // Reset will be handled by CSS transitions
+    }
+    
+    function createHoverParticles(element) {
+        const rect = element.getBoundingClientRect();
+        
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    left: ${rect.left + Math.random() * rect.width}px;
+                    top: ${rect.top + Math.random() * rect.height}px;
+                    width: 2px;
+                    height: 2px;
+                    background: var(--neon-cyan);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    animation: particle-float 1s ease-out forwards;
+                    box-shadow: 0 0 6px var(--neon-cyan);
+                `;
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 1000);
+            }, i * 100);
+        }
+    }
+    
+    function addTouchFeedback(e) {
+        const element = e.currentTarget;
+        element.style.transform = (element.style.transform || '') + ' scale(0.95)';
+        element.style.transition = 'transform 0.1s ease-out';
+    }
+    
+    function removeTouchFeedback(e) {
+        const element = e.currentTarget;
+        element.style.transform = element.style.transform.replace(' scale(0.95)', '');
+    }
+    
+    function setupPageTransitions() {
+        // Add smooth transitions when navigating between pages
+        const pageLinks = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href$=".html"]');
+        
+        pageLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.target !== '_blank') {
+                    // Add page transition effect
+                    document.body.style.animation = 'page-transition-out 0.3s ease-in forwards';
+                }
+            });
+        });
+    }
+    
+    function setupFormAnimations() {
+        const formInputs = document.querySelectorAll('input, textarea');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.4)';
+                
+                // Create focus particles
+                createFocusEffect(this);
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '';
+            });
+        });
+    }
+    
+    function createFocusEffect(element) {
+        const rect = element.getBoundingClientRect();
+        
+        for (let i = 0; i < 4; i++) {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                left: ${rect.left + Math.random() * rect.width}px;
+                top: ${rect.top - 5}px;
+                width: 1px;
+                height: 8px;
+                background: linear-gradient(to bottom, var(--neon-cyan), transparent);
+                pointer-events: none;
+                z-index: 9999;
+                animation: focus-spark 0.8s ease-out forwards;
+            `;
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 800);
+        }
+    }
+
     // Show temporary notification
     function showNotification(message) {
         const notification = document.createElement('div');
