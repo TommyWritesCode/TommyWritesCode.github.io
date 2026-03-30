@@ -4,10 +4,14 @@
   "description": "Tommy Nicol's personal portfolio website",
   "type": "module",
   "scripts": {
-    "dev": "python3 -m http.server 8000",
+    "dev": "node dev-environment/local-server.js",
+    "dev:simple": "python3 -m http.server 8000",
     "build": "node scripts/build.mjs",
-    "new:post": "node scripts/scaffold.mjs",
-    "deploy:local": "npm run build && npm run dev"
+    "build:clean": "node deployment-tools/build-clean.js",
+    "deploy:clean": "node deployment-tools/deploy-clean.js",
+    "deploy:help": "node deployment-tools/deploy-clean.js --help",
+    "generate:pdf": "node generate-pdf.js",
+    "new:post": "node scripts/scaffold.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
