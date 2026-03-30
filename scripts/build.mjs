@@ -25,7 +25,7 @@ async function buildContent() {
   
   for (const collection of collections) {
     const contentDir = path.join(projectRoot, 'content', collection);
-    const outputDir = path.join(projectRoot, collection);
+    const outputDir = path.join(projectRoot, 'dist', collection);
     
     try {
       // Ensure output directory exists
@@ -499,7 +499,7 @@ async function createPostStyles() {
 }
 `;
 
-  const cssPath = path.join(projectRoot, 'css', 'post.css');
+  const cssPath = path.join(projectRoot, 'dist', 'css', 'post.css');
   await fs.writeFile(cssPath, postCss);
   console.log('Created post.css for content styling');
 }
