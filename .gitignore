@@ -28,3 +28,14 @@ Thumbs.db
 # Logs
 logs/
 *.log
+
+# Dev/build tooling (not needed in repo)
+dev-environment/
+production-src/
+deployment-tools/
+generate-pdf.js
+CMS_USER_MANUAL.md
+PERFORMANCE_GUIDE.md
+PROJECT_STRUCTURE.md
+README-DEPLOYMENT.md
+SETUP_AND_DEPLOYMENT_GUIDE.md
