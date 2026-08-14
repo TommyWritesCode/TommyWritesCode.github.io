@@ -552,6 +552,13 @@ main {
         var(--panel);
 }
 
+.project-card--favorite {
+    border-color: rgba(255, 95, 202, 0.5);
+    background:
+        linear-gradient(135deg, rgba(255, 95, 202, 0.11), transparent 45%),
+        var(--panel);
+}
+
 .project-card__number {
     color: var(--pink);
     font-family: var(--font-mono);
@@ -594,6 +601,12 @@ main {
     color: var(--lime);
     border-color: rgba(185, 244, 110, 0.25);
     background: rgba(185, 244, 110, 0.08);
+}
+
+.status--favorite {
+    color: #ff9dde;
+    border-color: rgba(255, 95, 202, 0.32);
+    background: var(--pink-soft);
 }
 
 .text-link {
