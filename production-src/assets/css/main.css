@@ -513,6 +513,11 @@ main {
 .about-hero h1 {
     max-width: 760px;
     font-size: clamp(2.4rem, 5.5vw, 4.75rem);
+    font-family: var(--font-body);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
 }
 
 .about-portrait {
