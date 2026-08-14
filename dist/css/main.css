@@ -269,6 +269,61 @@ main {
     gap: clamp(2.5rem, 7vw, 6rem);
 }
 
+.hero-photo {
+    position: relative;
+    width: min(100%, 390px);
+    margin: 0;
+    justify-self: end;
+    overflow: hidden;
+    border: 1px solid var(--line-bright);
+    border-radius: var(--radius);
+    background: var(--panel-solid);
+    box-shadow: var(--shadow), 0 0 42px rgba(83, 246, 255, 0.12);
+    isolation: isolate;
+}
+
+.hero-photo::after {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    content: "";
+    background: linear-gradient(180deg, rgba(7, 10, 18, 0.08) 40%, rgba(7, 10, 18, 0.82) 100%);
+    pointer-events: none;
+}
+
+.hero-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.78) contrast(1.08) brightness(0.78);
+}
+
+.hero-photo figcaption {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 2;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.hero-photo figcaption span:last-child {
+    color: var(--cyan);
+    white-space: nowrap;
+}
+
 .hero h1,
 .page-hero h1 {
     max-width: 900px;
@@ -945,6 +1000,11 @@ main {
 
     .about-portrait {
         width: min(100%, 360px);
+        justify-self: start;
+    }
+
+    .hero-photo {
+        width: min(100%, 390px);
         justify-self: start;
     }
 
