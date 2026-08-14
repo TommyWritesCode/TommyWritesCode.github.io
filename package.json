@@ -4,9 +4,10 @@
   "description": "Tommy Nicol's personal portfolio website",
   "type": "module",
   "scripts": {
-    "dev": "node dev-environment/local-server.js",
-    "dev:simple": "python3 -m http.server 8000",
-    "build": "node scripts/build.mjs",
+    "dev": "npm run build && python3 -m http.server 8000 --directory dist",
+    "dev:simple": "python3 -m http.server 8000 --directory dist",
+    "build": "node deployment-tools/build-clean.js",
+    "check": "node scripts/check-site.mjs",
     "build:clean": "node deployment-tools/build-clean.js",
     "deploy:clean": "node deployment-tools/deploy-clean.js",
     "deploy:help": "node deployment-tools/deploy-clean.js --help",

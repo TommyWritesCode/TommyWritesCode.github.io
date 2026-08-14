@@ -29,10 +29,10 @@ Thumbs.db
 logs/
 *.log
 
-# Dev/build tooling (not needed in repo)
+# Local-only development tooling
 dev-environment/
-production-src/
-deployment-tools/
+deployment-tools/*
+!deployment-tools/build-clean.js
 generate-pdf.js
 CMS_USER_MANUAL.md
 PERFORMANCE_GUIDE.md
