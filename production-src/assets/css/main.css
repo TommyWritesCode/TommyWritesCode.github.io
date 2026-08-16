@@ -757,6 +757,235 @@ main {
     margin-top: 0;
 }
 
+.tool-card {
+    overflow: hidden;
+    border: 1px solid var(--line-bright);
+    border-radius: var(--radius);
+    background:
+        linear-gradient(145deg, rgba(83, 246, 255, 0.08), transparent 35%),
+        var(--panel);
+    box-shadow: var(--shadow);
+}
+
+.tool-card__topline {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem clamp(1.25rem, 4vw, 2.25rem);
+    color: var(--pink);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tool-card__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(2rem, 6vw, 5rem);
+    padding: clamp(1.6rem, 5vw, 3rem);
+}
+
+.tool-card__intro h2 {
+    margin: 0 0 1rem;
+    font-family: var(--font-mono);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+}
+
+.tool-card__lede {
+    max-width: 760px;
+    margin: 0;
+    color: var(--text-soft);
+    font-size: 1.08rem;
+}
+
+.tool-card code,
+.install-guide code,
+.checksum code {
+    color: var(--cyan);
+    font-family: var(--font-mono);
+}
+
+.tool-card__download {
+    width: min(100%, 230px);
+    align-self: start;
+}
+
+.tool-card__download .button {
+    width: 100%;
+}
+
+.tool-card__download .text-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.tool-card__download > span {
+    display: block;
+    margin-top: 0.8rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+}
+
+.tool-card > .notice {
+    margin: 0 clamp(1.25rem, 4vw, 2.25rem) clamp(1.25rem, 4vw, 2.25rem);
+}
+
+.notice strong {
+    color: var(--text);
+}
+
+.tool-facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-block: 1px solid var(--line);
+}
+
+.tool-facts > div {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.tool-facts > div + div {
+    border-left: 1px solid var(--line);
+}
+
+.tool-facts__index {
+    color: var(--pink);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+}
+
+.tool-facts h3,
+.tool-commands h3 {
+    margin: 0.55rem 0 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+}
+
+.tool-facts p,
+.tool-commands p {
+    margin: 0;
+    color: var(--text-soft);
+    font-size: 0.92rem;
+}
+
+.install-guide {
+    scroll-margin-top: 6rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.install-guide summary {
+    display: flex;
+    min-height: 68px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem clamp(1.25rem, 4vw, 2.25rem);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+}
+
+.install-guide summary::-webkit-details-marker {
+    display: none;
+}
+
+.install-guide summary span:last-child {
+    color: var(--cyan);
+    font-size: 1.5rem;
+    transition: transform 160ms ease;
+}
+
+.install-guide[open] summary span:last-child {
+    transform: rotate(45deg);
+}
+
+.install-guide__body {
+    padding: 0 clamp(1.25rem, 4vw, 2.25rem) clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.install-steps {
+    display: grid;
+    gap: 1.3rem;
+    margin: 0;
+    padding-left: 1.35rem;
+    color: var(--text-soft);
+}
+
+.install-steps li::marker {
+    color: var(--pink);
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+.install-steps strong {
+    color: var(--text);
+}
+
+.install-steps p {
+    margin: 0.65rem 0 0;
+}
+
+.install-guide pre {
+    max-width: 100%;
+    margin: 0.75rem 0 0;
+    overflow-x: auto;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: rgba(7, 10, 18, 0.88);
+    -webkit-overflow-scrolling: touch;
+}
+
+.install-guide pre code {
+    font-size: 0.82rem;
+    white-space: pre;
+}
+
+.tool-commands {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.tool-commands > div {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-small);
+    background: rgba(7, 10, 18, 0.45);
+}
+
+.checksum {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.25rem clamp(1.25rem, 4vw, 2.25rem);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+}
+
+.checksum span {
+    color: var(--text-soft);
+    white-space: nowrap;
+}
+
+.checksum code {
+    overflow-wrap: anywhere;
+}
+
 .inline-code {
     color: var(--cyan);
     font-family: var(--font-mono);
@@ -1259,6 +1488,29 @@ main {
         text-align: left;
     }
 
+    .tool-card__intro,
+    .tool-commands {
+        grid-template-columns: 1fr;
+    }
+
+    .tool-card__download {
+        width: 100%;
+    }
+
+    .tool-facts {
+        grid-template-columns: 1fr;
+    }
+
+    .tool-facts > div + div {
+        border-top: 1px solid var(--line);
+        border-left: 0;
+    }
+
+    .checksum {
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+    }
+
     .article-card {
         grid-template-columns: 1fr;
         gap: 0.8rem;
@@ -1350,6 +1602,30 @@ main {
 
     .project-card .tag {
         padding: 0.3rem 0.55rem;
+    }
+
+    .tool-card__topline {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .tool-card__intro {
+        gap: 1.5rem;
+        padding: 1.25rem;
+    }
+
+    .tool-card__intro h2 {
+        font-size: clamp(1.55rem, 8vw, 2rem);
+    }
+
+    .tool-card__lede {
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+
+    .install-guide pre {
+        margin-inline: -0.35rem;
+        padding: 0.75rem;
     }
 
     .project-links {
