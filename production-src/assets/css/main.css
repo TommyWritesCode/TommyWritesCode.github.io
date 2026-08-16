@@ -648,6 +648,12 @@ main {
     gap: 1.25rem;
 }
 
+.project-group + .project-group {
+    margin-top: clamp(4.5rem, 9vw, 7rem);
+    padding-top: clamp(4rem, 7vw, 5.5rem);
+    border-top: 1px solid var(--line);
+}
+
 .project-card {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -733,6 +739,23 @@ main {
 
 .text-link:hover {
     color: var(--text);
+}
+
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.4rem;
+    margin-top: 1.2rem;
+}
+
+.project-links .text-link {
+    margin-top: 0;
+}
+
+.inline-code {
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
 }
 
 .article-card {
