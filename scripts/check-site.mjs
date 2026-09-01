@@ -8,6 +8,7 @@ const projectRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const siteRoot = path.join(projectRoot, 'dist');
 const htmlFiles = [];
 const errors = [];
+const duplicateCopyPattern = /(?:^|\/)\S.* \d+\.html$/;
 
 async function collectHtml(directory) {
   for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
@@ -28,9 +29,10 @@ await collectHtml(siteRoot);
 
 for (const htmlPath of htmlFiles) {
   const html = await fs.readFile(htmlPath, 'utf8');
+  const relativePath = path.relative(siteRoot, htmlPath).split(path.sep).join('/');
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
   for (const id of new Set(ids.filter((id, index) => ids.indexOf(id) !== index))) {
-    errors.push(`${path.relative(siteRoot, htmlPath)}: duplicate id "${id}"`);
+    errors.push(`${relativePath}: duplicate id "${id}"`);
   }
 
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
@@ -40,7 +42,55 @@ for (const htmlPath of htmlFiles) {
       const stat = await fs.stat(target);
       if (stat.isDirectory()) await fs.access(path.join(target, 'index.html'));
     } catch {
-      errors.push(`${path.relative(siteRoot, htmlPath)}: missing ${match[1]}`);
+      errors.push(`${relativePath}: missing ${match[1]}`);
+    }
+  }
+
+  // Finder-created duplicate copies in this working tree are not canonical public pages.
+  if (duplicateCopyPattern.test(relativePath) || relativePath.startsWith('qa-')) continue;
+
+  const isSpanish = relativePath.startsWith('es/');
+  const expectedLanguage = isSpanish ? 'es' : 'en';
+  const declaredLanguage = html.match(/<html\s[^>]*lang="([^"]+)"/i)?.[1]?.toLowerCase();
+  if (!declaredLanguage?.startsWith(expectedLanguage)) {
+    errors.push(`${relativePath}: expected <html lang="${expectedLanguage}">`);
+  }
+
+  if (!html.includes('language-init.js')) {
+    errors.push(`${relativePath}: missing the early language initializer`);
+  }
+  if (!html.includes('main.js')) {
+    errors.push(`${relativePath}: missing the shared navigation and language-switch script`);
+  }
+  if (!html.includes('data-nav-links')) {
+    errors.push(`${relativePath}: missing the primary navigation target for the language switch`);
+  }
+
+  if (!isSpanish) {
+    const spanishCounterpart = path.join(siteRoot, 'es', ...relativePath.split('/'));
+    try {
+      await fs.access(spanishCounterpart);
+    } catch {
+      errors.push(`${relativePath}: missing Spanish counterpart es/${relativePath}`);
+    }
+    continue;
+  }
+
+  const englishRelativePath = relativePath.slice(3);
+  const englishCounterpart = path.join(siteRoot, ...englishRelativePath.split('/'));
+  try {
+    await fs.access(englishCounterpart);
+  } catch {
+    const explicitCounterpart = html.match(/<meta\s+name="language-counterpart"\s+content="([^"]+)"/i)?.[1];
+    if (!explicitCounterpart) {
+      errors.push(`${relativePath}: missing English counterpart or language-counterpart metadata`);
+    } else {
+      const target = resolveInternalReference(htmlPath, explicitCounterpart);
+      try {
+        await fs.access(target);
+      } catch {
+        errors.push(`${relativePath}: missing explicit English counterpart ${explicitCounterpart}`);
+      }
     }
   }
 }
@@ -51,4 +101,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Validated ${htmlFiles.length} HTML files with no broken internal references or duplicate IDs.`);
+console.log(`Validated ${htmlFiles.length} HTML files, internal links, and English/Spanish page parity.`);

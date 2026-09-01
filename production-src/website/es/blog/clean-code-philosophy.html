@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El código limpio es una forma de respeto | Tommy Nicol</title><meta name="description" content="Tommy Nicol explica por qué el código limpio constituye un compromiso con la comunicación clara, la mantenibilidad y las personas que trabajan con el software.">
+    <link rel="canonical" href="https://tommynicol.com/es/blog/clean-code-philosophy.html"><link rel="icon" type="image/png" href="/content/Images/Avatars/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/main.css?v=bilingual-1"><script src="/js/language-init.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+    <header class="site-header"><nav class="nav container" aria-label="Navegación principal"><a class="brand" href="/es/index.html" aria-label="Inicio de Tommy Nicol"><img class="brand__image" src="/content/Images/Avatars/logo.png" alt=""><span class="brand__text"><span class="brand__name">Tommy Nicol</span><span class="brand__role">Computación + Filosofía</span></span></a><button class="nav__toggle" type="button" aria-expanded="false" aria-controls="primary-links" aria-label="Abrir navegación" data-nav-toggle><span></span><span></span><span></span></button><ul class="nav__links" id="primary-links" data-nav-links data-open="false"><li><a class="nav__link" href="/es/about.html">Sobre mí</a></li><li><a class="nav__link" href="/es/projects.html">Proyectos</a></li><li><a class="nav__link" href="/es/tools.html">Herramientas</a></li><li><a class="nav__link" aria-current="page" href="/es/blog.html">Escritos</a></li><li><a class="nav__link" href="/es/resume.html">Currículum</a></li><li><a class="nav__link" href="/es/contact.html">Contacto</a></li></ul></nav></header>
+    <main id="main-content">
+        <article class="article">
+            <header class="article__header"><p class="eyebrow">Desarrollo de software</p><h1>El código limpio es una forma de respeto</h1><p class="article__dek">El software legible no es solo una preferencia de estilo. Es un compromiso con las personas que tendrán que usarlo, revisarlo, depurarlo y mantenerlo.</p><p class="article-meta"><time datetime="2024-01-08">8 de enero de 2024</time> · 6 minutos de lectura</p></header>
+            <div class="article__content">
+                <p>Cuando empecé a programar, pensaba que escribir código limpio consistía en respetar ciertas convenciones para los nombres y mantener cortas las funciones. Esas prácticas importan, pero apuntan hacia una idea más amplia: el código también es comunicación.</p>
+                <p>Escribimos instrucciones para las computadoras, pero a la vez dejamos explicaciones para otras personas. Quizás alguien del equipo tenga que ampliar una función el mes que viene. Tal vez otra persona deba diagnosticar un problema en producción a altas horas de la noche. Dentro de seis meses, nosotros mismos podemos ser quienes lean el código con desconcierto.</p>
+
+                <h2>La claridad es una elección</h2>
+                <p>Un nombre como <code>getUserById()</code> exige apenas un poco más de esfuerzo que una abreviatura, pero evita una duda a cada persona que lea el código después. Una función bien enfocada vuelve más seguro cualquier cambio. Un comentario breve puede explicar por qué existe una decisión poco habitual.</p>
+                <p>Ninguna de estas elecciones resulta extraordinaria por sí sola. Juntas determinan si un repositorio se siente como una herramienta compartida o como un acertijo que todos deben resolver de nuevo.</p>
+
+                <h2>La ética de la mantenibilidad</h2>
+                <p>La filosofía me ha hecho más consciente de que las decisiones técnicas afectan a otras personas. El código desordenado traslada el esfuerzo que ahorramos hoy a quien tendrá que mantenerlo mañana. Una interfaz inaccesible hace que el usuario pague el costo de un atajo de diseño. Un sistema que oculta sus concesiones dificulta que el equipo tome decisiones responsables.</p>
+                <blockquote>El buen código respeta el tiempo, la atención y las limitaciones de la próxima persona que se encuentre con él.</blockquote>
+                <p>Esto no significa que todo proyecto necesite una arquitectura perfecta. Significa que las personas afectadas por nuestro trabajo deben formar parte del cálculo.</p>
+
+                <h2>Limpio no significa ingenioso</h2>
+                <p>Buscar calidad encierra una paradoja: la obsesión por encontrar la abstracción perfecta puede volver el software más difícil de entender. El código limpio no es el que acumula más patrones, emplea menos líneas o adopta las herramientas más recientes. Es el que comunica su propósito y permite realizar los cambios que el proyecto de verdad necesita.</p>
+                <p>A veces una función más larga cuenta una historia más clara. A veces mantener una línea repetida es más sencillo que introducir una abstracción prematura. El criterio importa más que las reglas mecánicas.</p>
+
+                <h2>Principios que intento practicar</h2>
+                <h3>Escribe para quien venga después</h3>
+                <p>Da por hecho que alguien que no conoce la tarea tendrá que comprender el código. Haz evidente el camino importante y pon a cada cosa un nombre que exprese lo que significa.</p>
+                <h3>Explica la decisión, no la sintaxis</h3>
+                <p>El código suele mostrar qué hace. Los comentarios aportan más cuando conservan el contexto: la limitación, la concesión o la necesidad del usuario que motivó una elección.</p>
+                <h3>Deja el lugar mejor de como lo encontraste</h3>
+                <p>Las mejoras pequeñas se acumulan. Aclarar un nombre o eliminar una rama obsoleta reduce fricción sin convertir cada tarea en una reescritura completa.</p>
+                <h3>Invita a que te den opiniones</h3>
+                <p>El código legible mejora mediante la colaboración. Una revisión no es solo una barrera de control; también permite comprobar si una idea resulta tan clara para otra persona como para quien la escribió.</p>
+
+                <h2>El software es una actividad humana</h2>
+                <p>Los programas se ejecutan en máquinas, pero las personas imaginan, construyen, mantienen y utilizan el software. El código limpio reconoce esa realidad. Considera que la claridad forma parte de la calidad y que el mantenimiento forma parte del diseño.</p>
+                <p>La meta no es la perfección. La meta es facilitar y aclarar el trabajo de la siguiente persona, y construir sistemas dignos de su confianza.</p>
+            </div>
+            <div class="actions"><a class="button button--secondary" href="/es/blog.html">← Volver a escritos</a><a class="button" href="/es/contact.html">Continuar la conversación</a></div>
+        </article>
+    </main>
+    <footer class="site-footer"><div class="container footer__inner"><p class="footer__copy">© <span data-current-year>2026</span> Tommy Nicol. Hecho con HTML, CSS, JavaScript y curiosidad.</p><nav class="footer__links" aria-label="Enlaces sociales"><a href="mailto:tommynicol.dev@gmail.com" aria-label="Enviar un correo a Tommy Nicol"><img src="/content/Images/Icons/email.svg" alt=""></a><a href="https://github.com/TommyWritesCode" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="/content/Images/Icons/github.svg" alt=""></a><a href="https://www.tiktok.com/@tommynicol.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><img src="/content/Images/Icons/tiktok.svg" alt=""></a><a href="https://www.youtube.com/@tom_nic_dev" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="/content/Images/Icons/youtube.svg" alt=""></a></nav></div></footer>
+    <script src="/js/main.js?v=bilingual-1"></script>
+</body>
+</html>

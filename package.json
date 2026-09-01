@@ -7,7 +7,7 @@
     "dev": "npm run build && python3 -m http.server 8000 --directory dist",
     "dev:simple": "python3 -m http.server 8000 --directory dist",
     "build": "node deployment-tools/build-clean.js",
-    "check": "node scripts/check-site.mjs",
+    "check": "node scripts/check-site.mjs && node scripts/test-language.mjs",
     "build:clean": "node deployment-tools/build-clean.js",
     "deploy:clean": "node deployment-tools/deploy-clean.js",
     "deploy:help": "node deployment-tools/deploy-clean.js --help",

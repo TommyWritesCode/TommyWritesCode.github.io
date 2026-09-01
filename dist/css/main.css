@@ -186,6 +186,20 @@ a {
     background: var(--cyan-soft);
 }
 
+.language-switch {
+    gap: 0.4rem;
+    margin-left: 0.35rem;
+    color: var(--cyan);
+    border: 1px solid var(--line-bright);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+}
+
+.language-switch__name {
+    display: none;
+}
+
 .nav__link[aria-current="page"]::before {
     margin-right: 0.4rem;
     color: var(--cyan);
@@ -1454,6 +1468,19 @@ main {
     .nav__link {
         width: 100%;
         padding: 0.8rem;
+    }
+
+    .language-switch {
+        justify-content: space-between;
+        margin-left: 0;
+    }
+
+    .language-switch__name {
+        display: inline;
+        color: var(--text-soft);
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        letter-spacing: 0;
     }
 
     .hero,
