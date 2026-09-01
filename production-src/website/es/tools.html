@@ -43,7 +43,7 @@
                         <h2 id="talking-tom-title-es">Talking Tom</h2>
                         <p class="tool-card__lede">Una aplicación de código abierto para macOS que convierte un PDF, un documento de Word o un archivo de texto en audio listo para escuchar. Quita citas, encabezados repetidos, números de página y ruido de OCR; después narra el texto útil con una voz neuronal de Microsoft Edge. El reproductor con onda de sonido, el control de velocidad que conserva el tono y la transcripción guardada junto al audio hacen que funcione bien incluso con lecturas largas.</p>
                         <p class="tool-card__story"><strong>Por qué la construí.</strong> Informática y filosofía vienen con mucha lectura. Quería sacar los textos densos del escritorio y llevármelos a caminar, además de sustituir otra suscripción por una herramienta adaptada a mi forma real de estudiar.</p>
-                        <ul class="tag-list" aria-label="Compatibilidad y funciones"><li class="tag">macOS</li><li class="tag">Intel + Apple Silicon</li><li class="tag">Instalación autónoma</li><li class="tag">Claude opcional</li><li class="tag">Inglés + español</li></ul>
+                        <ul class="tag-list" aria-label="Compatibilidad y requisitos"><li class="tag">macOS</li><li class="tag">Intel + Apple Silicon</li><li class="tag">Instalación autónoma</li><li class="tag">Clave de Anthropic obligatoria</li><li class="tag">Inglés + español</li></ul>
                     </div>
                     <div class="tool-card__download">
                         <a class="button" href="/downloads/talking-tom-1.0.0.zip" download>Descargar ZIP <span aria-hidden="true">↓</span></a>
@@ -52,11 +52,11 @@
                     </div>
                 </div>
 
-                <p class="notice"><strong>Proyecto personal de código abierto.</strong> Talking Tom no es un producto oficial ni está afiliado o respaldado por Outfit7, Microsoft o Anthropic. El texto que se va a narrar se envía al servicio en línea de voces de Microsoft Edge para generar el audio. Si activas la limpieza o traducción con IA, el documento también se envía a Anthropic mediante tu propia clave de API. Los ajustes, el audio generado y las transcripciones se guardan localmente en tu Mac.</p>
+                <p class="notice"><strong>Proyecto personal de código abierto.</strong> Talking Tom no es un producto oficial ni está afiliado o respaldado por Outfit7, Microsoft o Anthropic. La aplicación necesita una clave de la API de Anthropic para procesar los documentos con Claude. El texto que se va a narrar se envía al servicio en línea de voces de Microsoft Edge para generar el audio, y el contenido del documento se envía a Anthropic mediante tu clave de API. Los ajustes, el audio generado y las transcripciones se guardan localmente en tu Mac.</p>
 
                 <div class="tool-facts" aria-label="Cómo funciona Talking Tom">
-                    <div><span class="tool-facts__index">01 / LIMPIAR</span><h3>Lee lo que importa</h3><p>Un sistema de reglas integrado elimina citas, encabezados, pies, números de página y palabras partidas por el OCR. El pase opcional con Claude se ocupa de documentos más desordenados sin perder su sentido ni su estructura.</p></div>
-                    <div><span class="tool-facts__index">02 / VOZ</span><h3>Inglés, español o ambos</h3><p>Elige entre voces neuronales en inglés y español. Con Claude activado, «Leer en» puede limpiar y traducir el documento antes de narrarlo, independientemente del idioma elegido para la interfaz.</p></div>
+                    <div><span class="tool-facts__index">01 / LIMPIAR</span><h3>Lee lo que importa</h3><p>Un sistema de reglas integrado elimina citas, encabezados, pies, números de página y palabras partidas por el OCR. Después, Claude se ocupa de documentos más desordenados sin perder su sentido ni su estructura.</p></div>
+                    <div><span class="tool-facts__index">02 / VOZ</span><h3>Inglés, español o ambos</h3><p>Elige entre voces neuronales en inglés y español. Claude prepara el documento antes de narrarlo y «Leer en» puede traducirlo independientemente del idioma elegido para la interfaz.</p></div>
                     <div><span class="tool-facts__index">03 / ESCUCHAR</span><h3>Un reproductor de verdad</h3><p>Recorre la onda de sonido, salta diez segundos y escucha entre 0,5× y 2× sin alterar el tono. El MP3 y su transcripción de texto se guardan juntos.</p></div>
                 </div>
 
@@ -64,11 +64,17 @@
                     <summary><span>Instalación y uso</span><span aria-hidden="true">+</span></summary>
                     <div class="install-guide__body">
                         <ol class="install-steps">
-                            <li><strong>Comprueba los requisitos.</strong> Necesitas un Mac—Intel o Apple Silicon—y conexión a internet para la instalación inicial. No hace falta instalar Python, Homebrew ni ningún otro requisito.</li>
+                            <li><strong>Comprueba los requisitos.</strong> Necesitas un Mac—Intel o Apple Silicon—, conexión a internet y una clave de la API de Anthropic. No hace falta instalar Python, Homebrew ni ningún otro programa.</li>
                             <li><strong>Configúralo una sola vez.</strong> Descarga y descomprime el archivo. Abre la carpeta <code>talking-tom-1.0.0</code>, <strong>haz clic derecho en <code>setup.command</code> y elige Abrir</strong>. No hagas doble clic: macOS bloquea los scripts descargados hasta que usas clic derecho → Abrir una vez. Cuando aparezca el aviso de seguridad, vuelve a pulsar <strong>Abrir</strong>.</li>
                             <li><strong>Espera a que termine la instalación.</strong> Se abrirá una ventana de Terminal que descargará una copia privada de Python y las dependencias, creará <strong>Talking Tom</strong> en tu carpeta Aplicaciones y pondrá un acceso directo en el Escritorio. Tarda unos dos minutos. Cuando Terminal muestre <strong>Done.</strong>, ya puedes borrar la carpeta descargada.</li>
                             <li><strong>Abre la aplicación.</strong> Inicia <strong>Talking Tom</strong> desde Aplicaciones o el acceso directo del Escritorio. La primera vez, elige English o Español; podrás cambiarlo más adelante en Ajustes.</li>
-                            <li><strong>Usa Claude solo si quieres.</strong> El limpiador integrado y gratuito funciona sin clave de API. Si quieres limpieza con IA o traducción entre inglés y español, abre <strong>Ajustes</strong> y añade tu propia clave de la API de Anthropic.</li>
+                            <li><strong>Conecta Claude antes de usar Talking Tom.</strong>
+                                <ol type="a">
+                                    <li>Consulta la <a href="https://platform.claude.com/docs/en/api/overview" target="_blank" rel="noopener noreferrer">guía oficial de la API de Anthropic <span aria-hidden="true">↗</span></a> para seguir sus instrucciones actuales.</li>
+                                    <li>Crea o administra tu clave en la página oficial de <a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener noreferrer">claves de API <span aria-hidden="true">↗</span></a>. La página de <a href="https://platform.claude.com/settings/billing" target="_blank" rel="noopener noreferrer">facturación de Anthropic <span aria-hidden="true">↗</span></a> contiene sus opciones actuales de pago y crédito.</li>
+                                    <li>Abre <strong>Ajustes</strong> en Talking Tom, pega tu clave de la API de Anthropic y guárdala.</li>
+                                </ol>
+                            </li>
                             <li><strong>Elige un documento y escucha.</strong> Selecciona un PDF, un documento de Word (<code>.docx</code>) o un archivo de texto—o pega el texto—y elige la voz, la velocidad, el modo de limpieza y el idioma final. Talking Tom guarda el MP3 y la transcripción en <code>~/Talking Tom/</code>.</li>
                         </ol>
 
