@@ -37,7 +37,7 @@
             </article>
 
             <article class="tool-card" aria-labelledby="talking-tom-title-es">
-                <div class="tool-card__topline"><span>02 / aplicación para macOS</span><span class="status status--live">● Versión 1.0.0</span></div>
+                <div class="tool-card__topline"><span>02 / aplicación para macOS</span><span class="status status--live">● Versión 1.0.1</span></div>
                 <div class="tool-card__intro">
                     <div>
                         <h2 id="talking-tom-title-es">Talking Tom</h2>
@@ -46,11 +46,14 @@
                         <ul class="tag-list" aria-label="Compatibilidad y requisitos"><li class="tag">macOS</li><li class="tag">Intel + Apple Silicon</li><li class="tag">Instalación autónoma</li><li class="tag">Clave de Anthropic obligatoria</li><li class="tag">Inglés + español</li></ul>
                     </div>
                     <div class="tool-card__download">
-                        <a class="button" href="/downloads/talking-tom-1.0.0.zip" download>Descargar ZIP <span aria-hidden="true">↓</span></a>
+                        <a class="button" href="/downloads/talking-tom-1.0.1.zip" download>Descargar ZIP <span aria-hidden="true">↓</span></a>
                         <a class="text-link" href="#talking-tom-install-es">Instrucciones de instalación <span aria-hidden="true">↓</span></a>
-                        <span>ZIP · 1,2 MB</span>
+                        <span>ZIP · 1,3 MB</span>
                     </div>
                 </div>
+
+                <p class="notice"><strong>Novedades de la versión 1.0.1.</strong> Detén una tarea en curso, recibe avisos sobre páginas PDF sin texto legible y disfruta de mejoras en los ajustes, los mensajes de error y el procesamiento en segundo plano. Al abrir la aplicación de nuevo, se utiliza la instancia que ya está en ejecución.</p>
+                <p><strong>¿Vas a actualizar?</strong> Cierra Talking Tom y ejecuta <code>setup.command</code> desde la nueva descarga. Se conservan tus ajustes, el audio guardado y las transcripciones.</p>
 
                 <p class="notice"><strong>Proyecto personal de código abierto.</strong> Talking Tom no es un producto oficial ni está afiliado o respaldado por Outfit7, Microsoft o Anthropic. La aplicación necesita una clave de la API de Anthropic para procesar los documentos con Claude. El texto que se va a narrar se envía al servicio en línea de voces de Microsoft Edge para generar el audio, y el contenido del documento se envía a Anthropic mediante tu clave de API. Los ajustes, el audio generado y las transcripciones se guardan localmente en tu Mac.</p>
 
@@ -65,7 +68,7 @@
                     <div class="install-guide__body">
                         <ol class="install-steps">
                             <li><strong>Comprueba los requisitos.</strong> Necesitas un Mac—Intel o Apple Silicon—, conexión a internet y una clave de la API de Anthropic. No hace falta instalar Python, Homebrew ni ningún otro programa.</li>
-                            <li><strong>Configúralo una sola vez.</strong> Descarga y descomprime el archivo. Abre la carpeta <code>talking-tom-1.0.0</code>, <strong>haz clic derecho en <code>setup.command</code> y elige Abrir</strong>. No hagas doble clic: macOS bloquea los scripts descargados hasta que usas clic derecho → Abrir una vez. Cuando aparezca el aviso de seguridad, vuelve a pulsar <strong>Abrir</strong>.</li>
+                            <li><strong>Configúralo una sola vez.</strong> Descarga y descomprime el archivo. Abre la carpeta <code>talking-tom-1.0.1</code>, <strong>haz clic derecho en <code>setup.command</code> y elige Abrir</strong>. No hagas doble clic: macOS bloquea los scripts descargados hasta que usas clic derecho → Abrir una vez. Cuando aparezca el aviso de seguridad, vuelve a pulsar <strong>Abrir</strong>.</li>
                             <li><strong>Espera a que termine la instalación.</strong> Se abrirá una ventana de Terminal que descargará una copia privada de Python y las dependencias, creará <strong>Talking Tom</strong> en tu carpeta Aplicaciones y pondrá un acceso directo en el Escritorio. Tarda unos dos minutos. Cuando Terminal muestre <strong>Done.</strong>, ya puedes borrar la carpeta descargada.</li>
                             <li><strong>Abre la aplicación.</strong> Inicia <strong>Talking Tom</strong> desde Aplicaciones o el acceso directo del Escritorio. La primera vez, elige English o Español; podrás cambiarlo más adelante en Ajustes.</li>
                             <li><strong>Conecta Claude antes de usar Talking Tom.</strong>
