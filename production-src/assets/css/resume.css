@@ -1,0 +1,8 @@
+.resume-grid { align-items: start; }
+.resume-grid > *, .resume-project { min-width: 0; }
+.resume-block { overflow-wrap: anywhere; }
+.resume-block li + li { margin-top: .65rem; }
+.resume-block .resume-meta, .resume-download-note { font-size: .9rem; color: var(--text-soft); }
+.resume-project + .resume-project { margin-top: 1.8rem; padding-top: .5rem; border-top: 1px solid var(--line); }
+.resume-project:last-of-type { margin-bottom: 1.5rem; }
+.resume-download-note { margin: .8rem 0 1.2rem; }
