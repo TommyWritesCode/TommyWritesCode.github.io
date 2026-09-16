@@ -52,6 +52,8 @@
                     </div>
                 </div>
 
+                <p class="notice"><strong>Seguridad de macOS.</strong> Esta descarga es un instalador desde el código fuente sin firma de Developer ID. Apple puede avisar que no puede verificar al desarrollador o comprobar si contiene malware. Consulta <a href="https://support.apple.com/es-es/102445" target="_blank" rel="noopener noreferrer">la guía de seguridad de Apple</a>. Si el mensaje indica que dañará tu ordenador o contiene malware, detén la instalación y comunica el aviso exacto. No se incluyen claves de API ni ajustes personales; utiliza tu propia clave de Anthropic.</p>
+
                 <p class="notice"><strong>Novedades de la versión 1.0.1.</strong> Detén una tarea en curso, recibe avisos sobre páginas PDF sin texto legible y disfruta de mejoras en los ajustes, los mensajes de error y el procesamiento en segundo plano. Al abrir la aplicación de nuevo, se utiliza la instancia que ya está en ejecución.</p>
                 <p><strong>¿Vas a actualizar?</strong> Cierra Talking Tom y ejecuta <code>setup.command</code> desde la nueva descarga. Se conservan tus ajustes, el audio guardado y las transcripciones.</p>
 
@@ -68,7 +70,7 @@
                     <div class="install-guide__body">
                         <ol class="install-steps">
                             <li><strong>Comprueba los requisitos.</strong> Necesitas un Mac—Intel o Apple Silicon—, conexión a internet y una clave de la API de Anthropic. No hace falta instalar Python, Homebrew ni ningún otro programa.</li>
-                            <li><strong>Configúralo una sola vez.</strong> Descarga y descomprime el archivo. Abre la carpeta <code>talking-tom-1.0.1</code>, <strong>haz clic derecho en <code>setup.command</code> y elige Abrir</strong>. No hagas doble clic: macOS bloquea los scripts descargados hasta que usas clic derecho → Abrir una vez. Cuando aparezca el aviso de seguridad, vuelve a pulsar <strong>Abrir</strong>.</li>
+                            <li><strong>Revisa el instalador.</strong> Descarga y descomprime el archivo, abre la carpeta <code>talking-tom-1.0.1</code> y lee <code>README.md</code> antes de abrir <code>setup.command</code>. Este instalador desde el código fuente no está firmado con Developer ID ni notarizado por Apple.</li>
                             <li><strong>Espera a que termine la instalación.</strong> Se abrirá una ventana de Terminal que descargará una copia privada de Python y las dependencias, creará <strong>Talking Tom</strong> en tu carpeta Aplicaciones y pondrá un acceso directo en el Escritorio. Tarda unos dos minutos. Cuando Terminal muestre <strong>Done.</strong>, ya puedes borrar la carpeta descargada.</li>
                             <li><strong>Abre la aplicación.</strong> Inicia <strong>Talking Tom</strong> desde Aplicaciones o el acceso directo del Escritorio. La primera vez, elige English o Español; podrás cambiarlo más adelante en Ajustes.</li>
                             <li><strong>Conecta Claude antes de usar Talking Tom.</strong>
@@ -82,7 +84,7 @@
                         </ol>
 
                         <div class="tool-commands">
-                            <div><h3>Instalar</h3><pre><code>Clic derecho en setup.command → Abrir</code></pre></div>
+                            <div><h3>Instalar</h3><pre><code>Lee README.md antes de setup.command</code></pre></div>
                             <div><h3>Iniciar</h3><pre><code>Abre Talking Tom desde Aplicaciones</code></pre></div>
                             <div><h3>Tus archivos</h3><pre><code>~/Talking Tom/</code></pre><p>El audio generado y las transcripciones se guardan juntos en esta carpeta.</p></div>
                         </div>

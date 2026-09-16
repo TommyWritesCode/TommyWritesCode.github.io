@@ -89,6 +89,8 @@
                     </div>
                 </div>
 
+                <p class="notice"><strong>macOS security.</strong> This download is an unsigned source installer. Apple may warn that it cannot verify the developer or check the software for malware. See <a href="https://support.apple.com/102445" target="_blank" rel="noopener noreferrer">Apple’s security guidance</a>. If the message says the app will damage your computer or contains malware, stop and report the exact warning. No API keys or personal settings are included; use your own Anthropic key.</p>
+
                 <p class="notice"><strong>New in 1.0.1.</strong> Stop an active job, get warnings about PDF pages without readable text, and benefit from improvements to settings, error messages, and background processing. Opening the app again reuses the running instance.</p>
                 <p><strong>Updating?</strong> Quit Talking Tom, then run <code>setup.command</code> from the new download. Your settings, saved audio, and transcripts are preserved.</p>
 
@@ -105,7 +107,7 @@
                     <div class="install-guide__body">
                         <ol class="install-steps">
                             <li><strong>Check the requirements.</strong> You need a Mac—Intel or Apple Silicon—an internet connection, and an Anthropic API key. You do not need to install Python, Homebrew, or any other software prerequisite.</li>
-                            <li><strong>Set it up once.</strong> Download and unzip the file. Open the <code>talking-tom-1.0.1</code> folder, then <strong>right-click <code>setup.command</code> and choose Open</strong>. Do not double-click it: macOS blocks downloaded scripts until you use right-click → Open once. When the security message appears, click <strong>Open</strong> again.</li>
+                            <li><strong>Review the installer.</strong> Download and unzip the file, open the <code>talking-tom-1.0.1</code> folder, and read <code>README.md</code> before opening <code>setup.command</code>. This source installer is not signed with Developer ID or notarized by Apple.</li>
                             <li><strong>Let setup finish.</strong> A Terminal window downloads a private copy of Python and the app’s dependencies, then builds <strong>Talking Tom</strong> in your Applications folder and places a shortcut on your Desktop. This takes about two minutes. When Terminal says <strong>Done.</strong>, you can delete the downloaded folder.</li>
                             <li><strong>Open the app.</strong> Launch <strong>Talking Tom</strong> from Applications or the Desktop shortcut. On first launch, choose English or Español; you can change this later in Settings.</li>
                             <li><strong>Connect Claude before using Talking Tom.</strong>
@@ -119,7 +121,7 @@
                         </ol>
 
                         <div class="tool-commands">
-                            <div><h3>Install</h3><pre><code>Right-click setup.command → Open</code></pre></div>
+                            <div><h3>Install</h3><pre><code>Read README.md before setup.command</code></pre></div>
                             <div><h3>Launch</h3><pre><code>Open Talking Tom from Applications</code></pre></div>
                             <div><h3>Your files</h3><pre><code>~/Talking Tom/</code></pre><p>Generated audio and transcripts stay together in this folder.</p></div>
                         </div>
