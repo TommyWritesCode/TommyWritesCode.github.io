@@ -28,53 +28,8 @@
         </div></section>
 
         <section class="section section--tinted"><div class="container">
-            <article class="tool-card" aria-labelledby="rate-limit-resumer-title">
-                <div class="tool-card__topline"><span>01 / macOS utility</span><span class="status status--live">● Version 1.0.1</span></div>
-                <div class="tool-card__intro">
-                    <div>
-                        <h2 id="rate-limit-resumer-title">Claude Code Rate-Limit Resumer</h2>
-                        <p class="tool-card__lede">An open-source macOS utility that detects when Claude Code reaches a session rate limit, waits until one minute after the stated reset time, and automatically sends <code>continue work</code> back into the same session. It runs locally, makes no network requests, and does not access project source code.</p>
-                        <ul class="tag-list" aria-label="Requirements"><li class="tag">macOS</li><li class="tag">Python 3.9+</li><li class="tag">Claude Code</li><li class="tag">tmux</li></ul>
-                    </div>
-                    <div class="tool-card__download">
-                        <a class="button" href="/downloads/claude-code-rate-limit-resumer-1.0.1.zip" download>Download ZIP <span aria-hidden="true">↓</span></a>
-                        <a class="text-link" href="#installation">Installation instructions <span aria-hidden="true">↓</span></a>
-                        <span>ZIP · 11.2 KB</span>
-                    </div>
-                </div>
-
-                <p class="notice"><strong>Community project.</strong> This is an unofficial tool and is not affiliated with or endorsed by Anthropic. Claude Code hooks run with your user permissions, so review the included <code>resumer.py</code> and <code>install.py</code> before installing.</p>
-
-                <div class="tool-facts" aria-label="How the utility works">
-                    <div><span class="tool-facts__index">01 / DETECT</span><h3>Reads the rate limit</h3><p>Uses Claude Code’s <code>StopFailure</code> hook and only reads the rate-limit error fields or visible text in its own tmux pane.</p></div>
-                    <div><span class="tool-facts__index">02 / WAIT</span><h3>Resumes at the right time</h3><p>Waits until one minute after the displayed reset time, then targets the same tmux pane instead of whichever Terminal window is in focus.</p></div>
-                    <div><span class="tool-facts__index">03 / VERIFY</span><h3>Fails safely</h3><p>It records Claude Code’s foreground process when the limit occurs and will not type if the pane is gone or that process has changed.</p></div>
-                </div>
-
-                <details class="install-guide" id="installation" open>
-                    <summary><span>Install and use</span><span aria-hidden="true">+</span></summary>
-                    <div class="install-guide__body">
-                        <ol class="install-steps">
-                            <li><strong>Check the requirements.</strong> You need macOS, Python 3.9 or newer, a current Claude Code installation with <code>StopFailure</code> hook support, and tmux. If tmux is missing, install it with Homebrew:<pre><code>brew install tmux</code></pre></li>
-                            <li><strong>Install the utility.</strong> Download and extract the ZIP, open Terminal in the extracted folder, and run:<pre><code>python3 install.py</code></pre><p>The installer copies the utility into <code>~/.local/share</code>, backs up your existing Claude settings, and adds the rate-limit hook without replacing your other settings.</p></li>
-                            <li><strong>Run Claude Code inside tmux.</strong> From your project directory, start or reconnect to a named tmux session, then continue your conversation:<pre><code>tmux new-session -A -s claude-work<br>claude --continue</code></pre><p>Use <code>claude --resume</code> instead when you need to choose a different saved conversation.</p></li>
-                            <li><strong>Verify the hook.</strong> In Claude Code, run <code>/hooks</code> and confirm that <code>StopFailure → rate_limit</code> appears.</li>
-                            <li><strong>Leave it running.</strong> When a rate limit occurs, the utility waits and sends only <code>continue work</code> to the original session. Your Mac must remain awake. Detach from tmux with <code>Ctrl+B</code>, then <code>D</code>; reconnect with the same tmux command.</li>
-                        </ol>
-
-                        <div class="tool-commands">
-                            <div><h3>Check status</h3><pre><code>~/.local/share/claude-rate-limit-resumer/resumer.py status</code></pre></div>
-                            <div><h3>Watch logs</h3><pre><code>tail -f ~/.local/state/claude-rate-limit-resumer/resumer.log</code></pre></div>
-                            <div><h3>Uninstall</h3><pre><code>python3 install.py uninstall</code></pre><p>Run this from the extracted release folder. It removes the hook and installed script while preserving local logs for inspection.</p></div>
-                        </div>
-                    </div>
-                </details>
-
-                <div class="checksum"><span>SHA-256 checksum</span><code>8091c3b2e137211b345bf47b2b6be840f96e055e961a72e79da020449e65c760</code></div>
-            </article>
-
             <article class="tool-card" aria-labelledby="talking-tom-title">
-                <div class="tool-card__topline"><span>02 / macOS app</span><span class="status status--live">● Version 1.0.1</span></div>
+                <div class="tool-card__topline"><span>01 / macOS app</span><span class="status status--live">● Version 1.1.0</span></div>
                 <div class="tool-card__intro">
                     <div>
                         <h2 id="talking-tom-title">Talking Tom</h2>
@@ -83,7 +38,7 @@
                         <ul class="tag-list" aria-label="Compatibility and requirements"><li class="tag">macOS</li><li class="tag">Intel + Apple Silicon</li><li class="tag">Self-contained setup</li><li class="tag">Anthropic API key required</li><li class="tag">English + Spanish</li></ul>
                     </div>
                     <div class="tool-card__download">
-                        <a class="button" href="/downloads/talking-tom-1.0.1.zip?v=20260915" download="talking-tom-1.0.1.zip">Download ZIP <span aria-hidden="true">↓</span></a>
+                        <a class="button" href="/downloads/talking-tom-1.1.0.zip?v=20260915" download="talking-tom-1.1.0.zip">Download ZIP <span aria-hidden="true">↓</span></a>
                         <a class="text-link" href="#talking-tom-install">Installation instructions <span aria-hidden="true">↓</span></a>
                         <span>ZIP · 1.3 MB</span>
                     </div>
@@ -93,14 +48,14 @@
 
                 <p><strong>Need to force-open the installer?</strong> Use Apple’s per-app security override in step 3 below. It approves only this installer; do not disable Gatekeeper or remove quarantine protection.</p>
 
-                <p class="notice"><strong>New in 1.0.1.</strong> Stop an active job, get warnings about PDF pages without readable text, and benefit from improvements to settings, error messages, and background processing. Opening the app again reuses the running instance.</p>
+                <p class="notice"><strong>New in 1.1.0: compact player.</strong> Shrink the window to as little as 380 × 270 pixels to keep the waveform, playback times, controls, and speed beside your PDF. The editor hides automatically; enlarge the window or click <strong>Full app</strong> to return. Playback and text are preserved, and the normal launch size stays the same.</p>
                 <p><strong>Updating?</strong> Quit Talking Tom, then run <code>setup.command</code> from the new download. Your settings, saved audio, and transcripts are preserved.</p>
 
                 <p class="notice"><strong>Open-source personal project.</strong> Talking Tom is unofficial and is not affiliated with or endorsed by Outfit7, Microsoft, or Anthropic. An Anthropic API key is required for the app’s Claude-powered document processing. Text selected for narration is sent to Microsoft’s online Edge voice service to generate audio, and document text is sent to Anthropic through your API key. Settings, generated audio, and transcripts are stored locally on your Mac.</p>
 
                 <div class="tool-facts" aria-label="How Talking Tom works">
                     <div><span class="tool-facts__index">01 / CLEAN</span><h3>Reads what matters</h3><p>A built-in rules pass removes citations, headers, footers, page numbers, and OCR word splits. Claude then handles messier documents while preserving their meaning and structure.</p></div>
-                    <div><span class="tool-facts__index">02 / VOICE</span><h3>English, Spanish, or both</h3><p>Choose from English and Spanish neural voices. Claude prepares the document before narration, and “Read in” can translate it independently of the app’s bilingual interface.</p></div>
+                    <div><span class="tool-facts__index">01 / VOICE</span><h3>English, Spanish, or both</h3><p>Choose from English and Spanish neural voices. Claude prepares the document before narration, and “Read in” can translate it independently of the app’s bilingual interface.</p></div>
                     <div><span class="tool-facts__index">03 / LISTEN</span><h3>A real audio player</h3><p>Scrub the waveform, jump ten seconds, and listen from 0.5× to 2× without shifting the pitch. The MP3 and its text transcript are saved together.</p></div>
                 </div>
 
@@ -109,7 +64,7 @@
                     <div class="install-guide__body">
                         <ol class="install-steps">
                             <li><strong>Check the requirements.</strong> You need a Mac—Intel or Apple Silicon—an internet connection, and an Anthropic API key. You do not need to install Python, Homebrew, or any other software prerequisite.</li>
-                            <li><strong>Review the installer.</strong> Download and unzip the file, open the <code>talking-tom-1.0.1</code> folder, and read <code>README.md</code> before opening <code>setup.command</code>. This source installer is not signed with Developer ID or notarized by Apple.</li>
+                            <li><strong>Review the installer.</strong> Download and unzip the file, open the <code>talking-tom-1.1.0</code> folder, and read <code>README.md</code> before opening <code>setup.command</code>. This source installer is not signed with Developer ID or notarized by Apple.</li>
                             <li><strong>If macOS blocks <code>setup.command</code>, force-open it with Apple’s per-app override.</strong>
                                 <ol type="a">
                                     <li>Try to open <code>setup.command</code> once so macOS records the blocked attempt.</li>
@@ -140,10 +95,55 @@
 
                 <div class="checksum"><span>SHA-256 checksum</span><code>6ce68a15d037f42e4b8eecd2d6bc226fc98d6d384250bc6656e6419f7b4ac26a</code></div>
             </article>
+
+            <article class="tool-card" aria-labelledby="rate-limit-resumer-title">
+                <div class="tool-card__topline"><span>02 / macOS utility</span><span class="status status--live">● Version 1.0.1</span></div>
+                <div class="tool-card__intro">
+                    <div>
+                        <h2 id="rate-limit-resumer-title">Claude Code Rate-Limit Resumer</h2>
+                        <p class="tool-card__lede">An open-source macOS utility that detects when Claude Code reaches a session rate limit, waits until one minute after the stated reset time, and automatically sends <code>continue work</code> back into the same session. It runs locally, makes no network requests, and does not access project source code.</p>
+                        <ul class="tag-list" aria-label="Requirements"><li class="tag">macOS</li><li class="tag">Python 3.9+</li><li class="tag">Claude Code</li><li class="tag">tmux</li></ul>
+                    </div>
+                    <div class="tool-card__download">
+                        <a class="button" href="/downloads/claude-code-rate-limit-resumer-1.0.1.zip" download>Download ZIP <span aria-hidden="true">↓</span></a>
+                        <a class="text-link" href="#installation">Installation instructions <span aria-hidden="true">↓</span></a>
+                        <span>ZIP · 11.2 KB</span>
+                    </div>
+                </div>
+
+                <p class="notice"><strong>Community project.</strong> This is an unofficial tool and is not affiliated with or endorsed by Anthropic. Claude Code hooks run with your user permissions, so review the included <code>resumer.py</code> and <code>install.py</code> before installing.</p>
+
+                <div class="tool-facts" aria-label="How the utility works">
+                    <div><span class="tool-facts__index">02 / DETECT</span><h3>Reads the rate limit</h3><p>Uses Claude Code’s <code>StopFailure</code> hook and only reads the rate-limit error fields or visible text in its own tmux pane.</p></div>
+                    <div><span class="tool-facts__index">02 / WAIT</span><h3>Resumes at the right time</h3><p>Waits until one minute after the displayed reset time, then targets the same tmux pane instead of whichever Terminal window is in focus.</p></div>
+                    <div><span class="tool-facts__index">03 / VERIFY</span><h3>Fails safely</h3><p>It records Claude Code’s foreground process when the limit occurs and will not type if the pane is gone or that process has changed.</p></div>
+                </div>
+
+                <details class="install-guide" id="installation" open>
+                    <summary><span>Install and use</span><span aria-hidden="true">+</span></summary>
+                    <div class="install-guide__body">
+                        <ol class="install-steps">
+                            <li><strong>Check the requirements.</strong> You need macOS, Python 3.9 or newer, a current Claude Code installation with <code>StopFailure</code> hook support, and tmux. If tmux is missing, install it with Homebrew:<pre><code>brew install tmux</code></pre></li>
+                            <li><strong>Install the utility.</strong> Download and extract the ZIP, open Terminal in the extracted folder, and run:<pre><code>python3 install.py</code></pre><p>The installer copies the utility into <code>~/.local/share</code>, backs up your existing Claude settings, and adds the rate-limit hook without replacing your other settings.</p></li>
+                            <li><strong>Run Claude Code inside tmux.</strong> From your project directory, start or reconnect to a named tmux session, then continue your conversation:<pre><code>tmux new-session -A -s claude-work<br>claude --continue</code></pre><p>Use <code>claude --resume</code> instead when you need to choose a different saved conversation.</p></li>
+                            <li><strong>Verify the hook.</strong> In Claude Code, run <code>/hooks</code> and confirm that <code>StopFailure → rate_limit</code> appears.</li>
+                            <li><strong>Leave it running.</strong> When a rate limit occurs, the utility waits and sends only <code>continue work</code> to the original session. Your Mac must remain awake. Detach from tmux with <code>Ctrl+B</code>, then <code>D</code>; reconnect with the same tmux command.</li>
+                        </ol>
+
+                        <div class="tool-commands">
+                            <div><h3>Check status</h3><pre><code>~/.local/share/claude-rate-limit-resumer/resumer.py status</code></pre></div>
+                            <div><h3>Watch logs</h3><pre><code>tail -f ~/.local/state/claude-rate-limit-resumer/resumer.log</code></pre></div>
+                            <div><h3>Uninstall</h3><pre><code>python3 install.py uninstall</code></pre><p>Run this from the extracted release folder. It removes the hook and installed script while preserving local logs for inspection.</p></div>
+                        </div>
+                    </div>
+                </details>
+
+                <div class="checksum"><span>SHA-256 checksum</span><code>8091c3b2e137211b345bf47b2b6be840f96e055e961a72e79da020449e65c760</code></div>
+            </article>
         </div></section>
     </main>
 
     <footer class="site-footer"><div class="container footer__inner"><p class="footer__copy">© <span data-current-year>2026</span> Tommy Nicol. Built with HTML, CSS, JavaScript, and curiosity.</p><nav class="footer__links" aria-label="Social links"><a href="mailto:tommynicol.dev@gmail.com" aria-label="Email Tommy Nicol"><img src="/content/Images/Icons/email.svg" alt=""></a><a href="https://github.com/TommyWritesCode" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="/content/Images/Icons/github.svg" alt=""></a><a href="https://www.tiktok.com/@tommynicol.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><img src="/content/Images/Icons/tiktok.svg" alt=""></a><a href="https://www.youtube.com/@tom_nic_dev" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="/content/Images/Icons/youtube.svg" alt=""></a></nav></div></footer>
-    <script src="js/main.js?v=bilingual-1"></script>
+    <script src="/js/main.js?v=bilingual-1"></script>
 </body>
 </html>
