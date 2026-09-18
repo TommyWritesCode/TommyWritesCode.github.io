@@ -12,7 +12,7 @@
         <section class="page-hero"><div class="container"><p class="eyebrow">Herramientas gratuitas</p><h1>Pequeñas utilidades para <span class="accent">flujos de trabajo obstinados.</span></h1><p class="page-hero__lede">Herramientas de código abierto que creo para quitar fricción al desarrollo, el aprendizaje y otros flujos de trabajo cotidianos. Puedes descargarlas, inspeccionarlas y adaptarlas libremente.</p></div></section>
         <section class="section section--tinted"><div class="container">
             <article class="tool-card" aria-labelledby="talking-tom-title-es">
-                <div class="tool-card__topline"><span>01 / aplicación para macOS</span><span class="status status--live">● Versión 1.1.0</span></div>
+                <div class="tool-card__topline"><span>01 / aplicación para macOS</span><span class="status status--live">● Versión 1.2.0</span></div>
                 <div class="tool-card__intro">
                     <div>
                         <h2 id="talking-tom-title-es">Talking Tom</h2>
@@ -21,7 +21,7 @@
                         <ul class="tag-list" aria-label="Compatibilidad y requisitos"><li class="tag">macOS</li><li class="tag">Intel + Apple Silicon</li><li class="tag">Instalación autónoma</li><li class="tag">Clave de Anthropic obligatoria</li><li class="tag">Inglés + español</li></ul>
                     </div>
                     <div class="tool-card__download">
-                        <a class="button" href="/downloads/talking-tom-1.1.0.zip?v=20260915" download="talking-tom-1.1.0.zip">Descargar ZIP <span aria-hidden="true">↓</span></a>
+                        <a class="button" href="/downloads/talking-tom-1.2.0.zip?v=20260918" download="talking-tom-1.2.0.zip">Descargar ZIP <span aria-hidden="true">↓</span></a>
                         <a class="text-link" href="#talking-tom-install-es">Instrucciones de instalación <span aria-hidden="true">↓</span></a>
                         <span>ZIP · 1,3 MB</span>
                     </div>
@@ -31,14 +31,14 @@
 
                 <p><strong>¿Necesitas forzar la apertura del instalador?</strong> Sigue la excepción de seguridad por aplicación que aparece en el paso 3. Solo autoriza este instalador; no desactives Gatekeeper ni elimines la protección de cuarentena.</p>
 
-                <p class="notice"><strong>Novedades de la versión 1.1.0: reproductor compacto.</strong> Reduce la ventana hasta 380 × 270 píxeles para mantener la onda, los tiempos, los controles y la velocidad junto a tu PDF. El editor se oculta automáticamente; amplía la ventana o pulsa <strong>Ampliar</strong> para volver. Se conservan la reproducción, el texto y el tamaño normal de inicio.</p>
+                <p class="notice"><strong>Novedades de la versión 1.2.0: reproductor compacto y velocidad fiable.</strong> Reduce Talking Tom hasta 380 × 270 píxeles junto a tu PDF; amplía la ventana o pulsa <strong>Ampliar</strong> para volver al editor. El audio nativo de macOS permite cambiar la velocidad de 0,5× a 2× sin el antiguo límite de una hora ni procesar toda la grabación en memoria. La velocidad se aplica al audio guardado, tanto si se generó a 1× como a otro ritmo. Se conservan la posición, la pausa, el texto y el tamaño normal de inicio.</p>
                 <p><strong>¿Vas a actualizar?</strong> Cierra Talking Tom y ejecuta <code>setup.command</code> desde la nueva descarga. Se conservan tus ajustes, el audio guardado y las transcripciones.</p>
 
                 <p class="notice"><strong>Proyecto personal de código abierto.</strong> Talking Tom no es un producto oficial ni está afiliado o respaldado por Outfit7, Microsoft o Anthropic. La aplicación necesita una clave de la API de Anthropic para procesar los documentos con Claude. El texto que se va a narrar se envía al servicio en línea de voces de Microsoft Edge para generar el audio, y el contenido del documento se envía a Anthropic mediante tu clave de API. Los ajustes, el audio generado y las transcripciones se guardan localmente en tu Mac.</p>
 
                 <div class="tool-facts" aria-label="Cómo funciona Talking Tom">
                     <div><span class="tool-facts__index">01 / LIMPIAR</span><h3>Lee lo que importa</h3><p>Un sistema de reglas integrado elimina citas, encabezados, pies, números de página y palabras partidas por el OCR. Después, Claude se ocupa de documentos más desordenados sin perder su sentido ni su estructura.</p></div>
-                    <div><span class="tool-facts__index">01 / VOZ</span><h3>Inglés, español o ambos</h3><p>Elige entre voces neuronales en inglés y español. Claude prepara el documento antes de narrarlo y «Leer en» puede traducirlo independientemente del idioma elegido para la interfaz.</p></div>
+                    <div><span class="tool-facts__index">02 / VOZ</span><h3>Inglés, español o ambos</h3><p>Elige entre voces neuronales en inglés y español. Claude prepara el documento antes de narrarlo y «Leer en» puede traducirlo independientemente del idioma elegido para la interfaz.</p></div>
                     <div><span class="tool-facts__index">03 / ESCUCHAR</span><h3>Un reproductor de verdad</h3><p>Recorre la onda de sonido, salta diez segundos y escucha entre 0,5× y 2× sin alterar el tono. El MP3 y su transcripción de texto se guardan juntos.</p></div>
                 </div>
 
@@ -47,7 +47,7 @@
                     <div class="install-guide__body">
                         <ol class="install-steps">
                             <li><strong>Comprueba los requisitos.</strong> Necesitas un Mac—Intel o Apple Silicon—, conexión a internet y una clave de la API de Anthropic. No hace falta instalar Python, Homebrew ni ningún otro programa.</li>
-                            <li><strong>Revisa el instalador.</strong> Descarga y descomprime el archivo, abre la carpeta <code>talking-tom-1.1.0</code> y lee <code>README.md</code> antes de abrir <code>setup.command</code>. Este instalador desde el código fuente no está firmado con Developer ID ni notarizado por Apple.</li>
+                            <li><strong>Revisa el instalador.</strong> Descarga y descomprime el archivo, abre la carpeta <code>talking-tom-1.2.0</code> y lee <code>README.md</code> antes de abrir <code>setup.command</code>. Este instalador desde el código fuente no está firmado con Developer ID ni notarizado por Apple.</li>
                             <li><strong>Si macOS bloquea <code>setup.command</code>, fuerza su apertura con la excepción de Apple para esta aplicación.</strong>
                                 <ol type="a">
                                     <li>Intenta abrir <code>setup.command</code> una vez para que macOS registre el bloqueo.</li>
@@ -86,7 +86,7 @@
                 <p class="notice"><strong>Proyecto comunitario.</strong> Esta es una herramienta no oficial, sin afiliación ni respaldo de Anthropic. Los hooks de Claude Code se ejecutan con los permisos de tu usuario; revisa los archivos <code>resumer.py</code> e <code>install.py</code> incluidos antes de instalarla.</p>
 
                 <div class="tool-facts" aria-label="Cómo funciona la utilidad">
-                    <div><span class="tool-facts__index">02 / DETECTAR</span><h3>Lee el límite de la sesión</h3><p>Utiliza el hook <code>StopFailure</code> de Claude Code y solo lee los campos del error del límite o, como alternativa, el texto visible en su propio panel de tmux.</p></div>
+                    <div><span class="tool-facts__index">01 / DETECTAR</span><h3>Lee el límite de la sesión</h3><p>Utiliza el hook <code>StopFailure</code> de Claude Code y solo lee los campos del error del límite o, como alternativa, el texto visible en su propio panel de tmux.</p></div>
                     <div><span class="tool-facts__index">02 / ESPERAR</span><h3>Reanuda en el momento adecuado</h3><p>Espera hasta un minuto después de la hora mostrada y apunta al mismo panel de tmux, no a la ventana de Terminal que esté activa.</p></div>
                     <div><span class="tool-facts__index">03 / VERIFICAR</span><h3>Falla de forma segura</h3><p>Registra el proceso de Claude Code que está en primer plano cuando se alcanza el límite y no escribe nada si el panel desaparece o el proceso cambia.</p></div>
                 </div>
